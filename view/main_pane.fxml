@@ -1,28 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main_view_controller">
+<AnchorPane prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main_view_controller">
    <children>
-      <Pane prefHeight="496.0" prefWidth="600.0">
+      <Pane prefHeight="490.0" prefWidth="600.0">
          <children>
-            <ListView fx:id="business_list" layoutX="400.0" layoutY="103.0" prefHeight="266.0" prefWidth="192.0" />
-            <Label fx:id="balance_label" layoutX="33.0" layoutY="59.0" prefHeight="35.0" prefWidth="360.0" text="Balance: ">
+            <ImageView fitHeight="507.0" fitWidth="888.0" layoutX="-192.0" layoutY="2.0" opacity="0.72" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/background.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="18.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/wallet.png" />
+               </image>
+            </ImageView>
+            <ListView fx:id="business_list" layoutX="365.0" layoutY="150.0" opacity="0.84" prefHeight="266.0" prefWidth="222.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px;" />
+            <Label fx:id="balance_label" layoutX="56.0" layoutY="89.0" prefHeight="35.0" prefWidth="360.0" text="Balance: " textFill="#e45b00">
                <font>
-                  <Font name="System Bold Italic" size="14.0" />
+                  <Font name="System Bold Italic" size="20.0" />
                </font></Label>
-            <Label fx:id="name_label" alignment="CENTER" layoutX="231.0" layoutY="14.0" prefHeight="44.0" prefWidth="139.0" text="Name" textAlignment="CENTER">
+            <Label fx:id="name_label" alignment="CENTER" layoutX="50.0" layoutY="14.0" prefHeight="44.0" prefWidth="500.0" text="Manager Name:" textAlignment="CENTER" textFill="#f57d6f">
                <font>
-                  <Font name="System Bold Italic" size="18.0" />
+                  <Font name="System Bold" size="22.0" />
                </font></Label>
-            <Label fx:id="time_label" layoutX="410.0" layoutY="59.0" prefHeight="35.0" prefWidth="181.0" text="Time:">
+            <Label fx:id="time_label" alignment="CENTER" layoutX="454.0" layoutY="434.0" prefHeight="35.0" prefWidth="132.0" style="-fx-background-color: #fff1e6; -fx-background-radius: 5px;" text="Time:" textFill="#ff9f1c">
                <font>
-                  <Font name="System Bold Italic" size="14.0" />
+                  <Font name="System Bold Italic" size="17.0" />
                </font></Label>
-            <ListView fx:id="own_business_list" layoutX="10.0" layoutY="103.0" prefHeight="266.0" prefWidth="380.0" />
-            <Button fx:id="upgrade_btn" layoutX="131.0" layoutY="406.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="139.0" text="Upgrade" />
+            <ListView fx:id="own_business_list" layoutX="11.0" layoutY="150.0" opacity="0.8" prefHeight="266.0" prefWidth="344.0" style="-fx-background-radius: 10px; -fx-border-radius: 10px;" />
+            <Button fx:id="upgrade_btn" layoutX="18.0" layoutY="430.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="139.0" style="-fx-border-color: white; -fx-border-radius: 25px; -fx-background-color: #ffa69e; -fx-background-radius: 25px;" text="Upgrade" textFill="#c94242">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <Label layoutX="18.0" layoutY="120.0" text="Business Owned List" textFill="#02902d">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="374.0" layoutY="120.0" text="Business List" textFill="#ddc50b">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/investor.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

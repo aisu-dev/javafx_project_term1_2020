@@ -5,23 +5,23 @@ import java.util.ArrayList;
 public class manager_model {
 
     private String name;
-    private float balance;
+    private double balance;
     private ArrayList<business_model> business = new ArrayList<>();
 
     public manager_model(String name){
         this.name = name;
-        this.balance = 10000000;
+        this.balance = 50000;
     }
 
     public String getName() {
         return name;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

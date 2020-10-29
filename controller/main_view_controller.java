@@ -17,6 +17,7 @@ import controller.Launcher.*;
 
 import javax.sound.sampled.Clip;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.text.DateFormat;
@@ -80,6 +81,7 @@ public class main_view_controller {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {
+                        System.out.println("Encountered an Interrupted Exception");
                     }
                     Platform.runLater(updater);
                 }
@@ -90,7 +92,7 @@ public class main_view_controller {
         thread.start();
 //      ----------------------------------------------------------------------------------------------------------------
 //      TODO: set name
-        name_label.setText("Name: "+Launcher.getManager().getName());
+        name_label.setText("Manager Name: "+Launcher.getManager().getName());
 //      TODO: business list manager
 
         business_list.getItems().addAll(getModelList());
@@ -158,16 +160,27 @@ public class main_view_controller {
         });
 
         upgrade_btn.setOnAction(event -> {
-
             if(own_business_list.getSelectionModel().getSelectedItem()!=null){
                 if(Launcher.getManager().getBalance()>=own_business_list.getSelectionModel().getSelectedItem().getPrice()){
-                    System.out.println(own_business_list.getSelectionModel().getSelectedItem());
+                    System.out.println(own_business_list.getSelectionModel().getSelectedItem()+" got upgraded :D");
                     Launcher.getManager().setBalance(Launcher.getManager().getBalance()-own_business_list.getSelectionModel().getSelectedItem().getPrice());
                     own_business_list.getSelectionModel().getSelectedItem().setLevel(own_business_list.getSelectionModel().getSelectedItem().getLevel()+1);
                     own_business_list.getSelectionModel().getSelectedItem().setPrice(Math.round(own_business_list.getSelectionModel().getSelectedItem().getPrice()*(1+own_business_list.getSelectionModel().getSelectedItem().getLevel()/10f)));
                     own_business_list.getSelectionModel().getSelectedItem().setProfit(Math.round((1+own_business_list.getSelectionModel().getSelectedItem().getInterest())*own_business_list.getSelectionModel().getSelectedItem().getProfit()));
                         update_ownList();
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Money");
+                    alert.setHeaderText(null);
+                    alert.setContentText(String.format("Not enough balance"));
+                    alert.showAndWait();
                 }
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Business Model");
+                alert.setHeaderText(null);
+                alert.setContentText(String.format("You must select your own business first!!"));
+                alert.showAndWait();
             }
         });
     }
@@ -187,7 +200,8 @@ public class main_view_controller {
                                 +"Count: "+business_model.getCount()+"/"+business_model.getPeriod());
                         imageView.setImage(new Image(business_model.getImgLink()));
                         setGraphic(imageView);
-                    }else{
+                    }
+                    else{
                         setText(null);
                         setGraphic(null);
                     }
@@ -198,14 +212,18 @@ public class main_view_controller {
     }
     private ObservableList<business_model> getModelList(){
         ObservableList<business_model> Model_List = FXCollections.<business_model>observableArrayList();
-        business_model haircut = new business_model("Haircut",10000,.25f,100,5,"assets/haircut.png");
-        business_model market = new business_model("Market",20000,.25f,1000,8,"assets/market.png");
-        business_model foodtruck = new business_model("Food Truck",50000,.25f,1000,5,"assets/foodtruck.png");
-        business_model restaurant = new business_model("Restaurant",100000,.2f,3000,5,"assets/restaurant.png");
-        business_model mobileapp = new business_model("Mobile-app",500000,.25f,7000,10,"assets/mobileapp.png");
-        business_model factory = new business_model("Factory",1000000,.25f,50000,18,"assets/factory.png");
-        business_model school = new business_model("School",10000000,.25f,500000,30,"assets/school.png");
-        Model_List.addAll(haircut,market,foodtruck,restaurant,mobileapp,factory,school);
+        try{
+            business_model haircut = new business_model("Haircut",10000,.25f,100,5,"assets/haircut.png");
+            business_model market = new business_model("Market",20000,.25f,1000,8,"assets/market.png");
+            business_model foodtruck = new business_model("Food Truck",50000,.25f,1000,5,"assets/foodtruck.png");
+            business_model restaurant = new business_model("Restaurant",100000,.25f,3000,7,"assets/restaurant.png");
+            business_model mobileapp = new business_model("Mobile-app",500000,.25f,7000,10,"assets/mobileapp.png");
+            business_model factory = new business_model("Factory",1000000,.25f,50000,18,"assets/factory.png");
+            business_model school = new business_model("School",10000000,.25f,500000,30,"assets/school.png");
+            Model_List.addAll(haircut,market,foodtruck,restaurant,mobileapp,factory,school);
+        }catch(IllegalArgumentException e){
+            System.out.println("Found an IllegalArgument Exception");
+        }
         return Model_List;
     }
     private ArrayList<business_model> getSelectedModel(ListView<business_model> listView){
@@ -257,6 +275,12 @@ public class main_view_controller {
         if (tm == TransferMode.MOVE&&Launcher.getManager().getBalance()>=listView.getSelectionModel().getSelectedItems().get(0).getPrice()) {
             Launcher.getManager().setBalance(Launcher.getManager().getBalance()-listView.getSelectionModel().getSelectedItems().get(0).getPrice());
             removeSelectedModel(listView);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Money");
+            alert.setHeaderText(null);
+            alert.setContentText(String.format("Not enough balance"));
+            alert.showAndWait();
         }
         event.consume();
     }

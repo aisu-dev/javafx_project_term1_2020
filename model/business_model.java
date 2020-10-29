@@ -9,9 +9,9 @@ public class business_model implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
     private int level;
-    private float price;
-    private float interest;
-    private float profit;
+    private double price;
+    private double interest;
+    private double profit;
     private int count;
     private int period;
     private String imgLink;
@@ -35,7 +35,7 @@ public class business_model implements Serializable {
         return period;
     }
 
-    public float getProfit() {
+    public double getProfit() {
         return profit;
     }
     @Override
@@ -47,7 +47,7 @@ public class business_model implements Serializable {
         return imgLink;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -67,7 +67,7 @@ public class business_model implements Serializable {
         this.profit = profit;
     }
 
-    public float getInterest() {
+    public double getInterest() {
         return interest;
     }
 
