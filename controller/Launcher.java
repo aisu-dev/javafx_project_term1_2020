@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class Launcher extends Application {
 
     private Parent main_root;
-    private Stage main_stage;
+    private static Stage main_stage;
     private Scene main_scene;
     private static manager_model manager;
     private static ArrayList<business_model>business = new ArrayList<>();
@@ -31,26 +32,18 @@ public class Launcher extends Application {
         this.main_scene = new Scene(this.main_root);
         this.main_stage.setScene(this.main_scene);
         this.main_stage.show();
-
-
     }
 
-    public static manager_model getManager() {
-        return manager;
-    }
 
-    public static void setManager(manager_model manager) {
-        Launcher.manager = manager;
-    }
-
+    public static manager_model getManager() { return manager;}
+    public static void setManager(manager_model manager) { Launcher.manager = manager;}
     public static void setCount(int count) {
         Launcher.count = count;
     }
-
     public static int getCount() {
         return count;
     }
-
+    public static void CloseWindow(){ main_stage.close();}
     public static void main(String[] args) {
         launch(args);
     }

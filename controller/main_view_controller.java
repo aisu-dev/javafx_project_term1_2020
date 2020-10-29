@@ -13,6 +13,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
 import model.business_model;
 import model.manager_model;
+import controller.Launcher.*;
 
 import javax.sound.sampled.Clip;
 import java.io.File;
@@ -131,6 +132,12 @@ public class main_view_controller {
                 dragDone(dragEvent,business_list);
             }
         });
+        business_list.setOnKeyPressed(keyEvent -> {
+            KeyCode keyCode = keyEvent.getCode();
+            if(keyCode.equals(KeyCode.ESCAPE)){
+                Launcher.CloseWindow();
+            }
+        });
         own_business_list.setOnDragOver(new EventHandler <DragEvent>() {
             @Override
             public void handle(DragEvent event) {
@@ -141,6 +148,12 @@ public class main_view_controller {
             @Override
             public void handle(DragEvent event) {
                 dragDropped(event,own_business_list);
+            }
+        });
+        own_business_list.setOnKeyPressed(keyEvent -> {
+            KeyCode keyCode = keyEvent.getCode();
+            if(keyCode.equals(KeyCode.ESCAPE)){
+                Launcher.CloseWindow();
             }
         });
 
@@ -157,7 +170,6 @@ public class main_view_controller {
                 }
             }
         });
-
     }
 
 //  Function
@@ -186,9 +198,14 @@ public class main_view_controller {
     }
     private ObservableList<business_model> getModelList(){
         ObservableList<business_model> Model_List = FXCollections.<business_model>observableArrayList();
-        business_model restaurant = new business_model("restaurant",10000,.2f,1000,5,"https://i.ibb.co/xH73ZqY/a.png");
-        business_model market = new business_model("market",20000,.25f,2000,7,"https://i.ibb.co/fF8jKw8/astronaut.png");
-        Model_List.addAll(restaurant,market);
+        business_model haircut = new business_model("Haircut",10000,.25f,100,5,"assets/haircut.png");
+        business_model market = new business_model("Market",20000,.25f,1000,8,"assets/market.png");
+        business_model foodtruck = new business_model("Food Truck",50000,.25f,1000,5,"assets/foodtruck.png");
+        business_model restaurant = new business_model("Restaurant",100000,.2f,3000,5,"assets/restaurant.png");
+        business_model mobileapp = new business_model("Mobile-app",500000,.25f,7000,10,"assets/mobileapp.png");
+        business_model factory = new business_model("Factory",1000000,.25f,50000,18,"assets/factory.png");
+        business_model school = new business_model("School",10000000,.25f,500000,30,"assets/school.png");
+        Model_List.addAll(haircut,market,foodtruck,restaurant,mobileapp,factory,school);
         return Model_List;
     }
     private ArrayList<business_model> getSelectedModel(ListView<business_model> listView){
@@ -243,4 +260,5 @@ public class main_view_controller {
         }
         event.consume();
     }
+
 }
